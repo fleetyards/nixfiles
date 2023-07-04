@@ -64,7 +64,7 @@
 
   systemd.tmpfiles.rules =
     [ "Q /persist 755 root - - -" "Q /persist/data/acme 750 nginx - - -" ];
-  services.resolved.dnssec = lib.mkDefault false;
+  services.resolved.dnssec = lib.mkDefault "false";
 
   services.telegraf.extraConfig.inputs = {
     kernel = { };
