@@ -1,0 +1,10 @@
+keys:
+  - &kloenk_age age1p06k9fwwdhwcx6qxt5fyypkdk9wpkhk5fhyzjnykaymz32nwsakqwyfjqm
+  - &mortik_age age16kshm3f9cwlhc5eq3fkg6j6cwnfraj5psl5s564nr43mvg0cvdps95s045
+creation_rules:
+  - path_regex: secrets/social[^/]*\.yaml$
+    key_groups:
+    - age:
+      - *kloenk_age
+      - *mortik_age
+      #- *server_social
