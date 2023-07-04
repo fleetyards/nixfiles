@@ -42,19 +42,20 @@
       legacyPackages = nixpkgsFor;
 
       nixosConfigurations =
-        let hive = colmena.lib.makeHive self.outputs.colmena;
+        let hive = inputs.colmena.lib.makeHive self.outputs.colmena;
         in hive.nodes;
 
       colmena = {
         meta = {
           nixpkgs = import nixpkgs {
-            system = "x86_64-linux";
-            overlays = (overlayCombinded "x86_64-linux");
-          };
-          nodeNixpkgs.social.nixpkgs = import nixpkgs {
             system = "aarch64-linux";
-            overlays = (overlayCombinded "aaarch64-linux");
+            overlays = (overlayCombinded "aarch64-linux");
           };
+          #nodeNixpkgs.social.nixpkgs = import nixpkgs {
+          #  system = "aarch64-linux";
+          #  overlays = (overlayCombinded "aaarch64-linux");
+          #};
+
           specialArgs.inputs = inputs;
         };
 

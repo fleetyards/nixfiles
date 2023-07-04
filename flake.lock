@@ -2126,11 +2126,11 @@
         "vika": "vika_2"
       },
       "locked": {
-        "lastModified": 1688458048,
-        "narHash": "sha256-JIc2cKRsVOKZaEehnfzUzjQehqOZeyq+FXY8PAqVKJc=",
+        "lastModified": 1688463939,
+        "narHash": "sha256-Ej/nW/N+xM/0a17Zva5PtocM6Rs9AtH2Puh2JDTEJFs=",
         "owner": "kloenk",
         "repo": "nixfiles",
-        "rev": "6ec9daccdffe0f7031f280c4907e0ef603639256",
+        "rev": "27bc6bf3235194950fad26273985429b7838c89f",
         "type": "github"
       },
       "original": {

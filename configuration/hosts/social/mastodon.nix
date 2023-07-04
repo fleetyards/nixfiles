@@ -2,6 +2,20 @@
 
 let mastoConfig = config.services.mastodon;
 in {
+  sops.secrets = let mastodon.owner = mastoConfig.user;
+  in {
+    "mastodon/smtp_password" = mastodon;
+    "mastodon/otp_secret" = mastodon;
+    "mastodon/secret_key" = mastodon;
+    "mastodon/vapid/private_key" = mastodon;
+    "mastodon/vapid/public_key" = mastodon;
+    #"restic-repo-password" = mastodon;
+    #"restic-server-jules" = mastodon;
+  };
+
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [ "elasticsearch" ];
+
   services.mastodon = let secrets = config.sops.secrets;
   in {
     enable = true;

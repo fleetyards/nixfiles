@@ -1,8 +1,6 @@
 { config, pkgs, lib, ... }:
 
 {
-  imports = [ ./nginx ];
-
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   networking.domain = lib.mkDefault "fleetyards.net";
