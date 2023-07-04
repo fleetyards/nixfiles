@@ -7,4 +7,5 @@ creation_rules:
     - age:
       - *kloenk_age
       - *mortik_age
+      - age1f2h5dc7nyvcp0l49t2d8jhm60nh4gts5pff5h0rkxkvx55z6e3ls69exw8
       #- *server_social
