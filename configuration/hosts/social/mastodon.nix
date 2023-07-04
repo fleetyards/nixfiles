@@ -9,6 +9,8 @@ in {
     "mastodon/secret_key" = mastodon;
     "mastodon/vapid/private_key" = mastodon;
     "mastodon/vapid/public_key" = mastodon;
+    "restic/env" = mastodon;
+    "restic/repo" = mastodon;
     #"restic-repo-password" = mastodon;
     #"restic-server-jules" = mastodon;
   };
@@ -113,23 +115,26 @@ in {
       lib.mkForce "0750"; # 0700 is default in the mastodon module
   };
 
-  /* restic-backups.mastodon = {
-       user = mastoConfig.user;
-       passwordFile = config.sops.secrets."restic-repo-password".path;
-       postgresDatabases = [ mastoConfig.database.name ];
-       paths = [
-         "/var/lib/mastodon/public-system/media_attachments" # Hardcoded in the NixOS module
-         (config.services.redis.servers.mastodon.settings.dir
-           + "/dump.rdb") # Mastodon advised: https://docs.joinmastodon.org/admin/backups/#redis
-       ];
-       targets = [{
-         user = "";
-         passwordFile = config.sops.secrets."restic-server-jules".path;
-         hostname = "";
-       }];
-       timerSpec = "*-*-* 05:11:00";
-     };
-  */
+  restic-backups.mastodon = {
+    user = mastoConfig.user;
+    passwordFile = config.sops.secrets."restic/repo".path;
+    postgresDatabases = [ mastoConfig.database.name ];
+    paths = [
+      "/var/lib/mastodon/public-system/media_attachments" # Hardcoded in the NixOS module
+      (config.services.redis.servers.mastodon.settings.dir
+        + "/dump.rdb") # Mastodon advised: https://docs.joinmastodon.org/admin/backups/#redis
+    ];
+    targets = [{
+      user = "foo";
+      passwordFile = "/dev/null";
+      hostname = "fra1.digitaloceanspaces.com";
+      protocol = "s3:https";
+    }];
+    timerSpec = "*-*-* 05:11:00";
+  };
+
+  systemd.services.restic-backup-mastodon.serviceConfig.EnvironmentFile =
+    config.sops.secrets."restic/env";
 
   systemd.services.restic-backup-mastodon.serviceConfig.SupplementaryGroups =
     config.systemd.services.redis-mastodon.serviceConfig.Group;

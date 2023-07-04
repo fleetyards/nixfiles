@@ -45,6 +45,8 @@
         let hive = inputs.colmena.lib.makeHive self.outputs.colmena;
         in hive.nodes;
 
+      nixosModules = { restic-backups = import ./modules/restic-backups.nix; };
+
       colmena = {
         meta = {
           nixpkgs = import nixpkgs {
@@ -69,6 +71,7 @@
 
             sops-nix.nixosModules.sops
             kloenk.nixosModules.nftables
+            self.nixosModules.restic-backups
           ];
 
           deployment = {
