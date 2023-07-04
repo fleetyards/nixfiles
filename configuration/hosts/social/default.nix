@@ -8,9 +8,11 @@
   ];
 
   boot.supportedFilesystems = [ "vfat" "btrfs" ];
-  boot.loader.grup.enable = true;
-  boot.loader.grub.version = 2;
-  boot.loader.grub.device = "/dev/sda";
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+  boot.kernelParams = [ "console=tty" ];
+  boot.initrd.kernelModules = [ "virtio_gpu" ];
+  services.qemuGuest.enable = true;
 
   networking.hostName = "social";
   networking.nameservers = [
@@ -22,7 +24,7 @@
 
   systemd.network.networks."40-enp1s0" = {
     name = "enp1s0";
-    # TODO addresses = [{ addressConfig.Address = "TODO"; }];
+    addresses = [{ addressConfig.Address = "2a01:4f8:c012:1932::/64"; }];
     routes = [{ routeConfig.Gateway = "fe80::1"; }];
   };
 
