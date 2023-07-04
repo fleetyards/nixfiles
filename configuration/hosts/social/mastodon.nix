@@ -134,7 +134,7 @@ in {
   };
 
   systemd.services.restic-backup-mastodon.serviceConfig.EnvironmentFile =
-    config.sops.secrets."restic/env";
+    [ config.sops.secrets."restic/env".path ];
 
   systemd.services.restic-backup-mastodon.serviceConfig.SupplementaryGroups =
     config.systemd.services.redis-mastodon.serviceConfig.Group;
