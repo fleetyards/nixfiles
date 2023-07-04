@@ -47,7 +47,14 @@
 
       colmena = {
         meta = {
-          nixpkgs = nixpkgs;
+          nixpkgs = import nixpkgs {
+            system = "x86_64-linux";
+            overlays = (overlayCombinded "x86_64-linux");
+          };
+          nodeNixpkgs.social.nixpkgs = import nixpkgs {
+            system = "aarch64-linux";
+            overlays = (overlayCombinded "aaarch64-linux");
+          };
           specialArgs.inputs = inputs;
         };
 
@@ -61,11 +68,6 @@
 
             sops-nix.nixosModules.sops
             kloenk.nixosModules.nftables
-          ];
-          modules = [
-            ({ config, ... }: {
-              nixpkgs.overlays = overlayCombinded config.nixpkgs.hostPlatform;
-            })
           ];
 
           deployment = {
