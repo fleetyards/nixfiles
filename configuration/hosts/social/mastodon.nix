@@ -129,6 +129,7 @@ in {
       passwordFile = "/dev/null";
       hostname = "fra1.digitaloceanspaces.com";
       protocol = "s3:https";
+      repoPath = "starcitizen-social-bucket";
     }];
     timerSpec = "*-*-* 05:11:00";
   };
