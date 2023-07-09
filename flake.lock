@@ -3814,11 +3814,11 @@
     },
     "nixpkgs_22": {
       "locked": {
-        "lastModified": 1688456219,
-        "narHash": "sha256-wpBU2xQ8QMZczTqxsdAWCnhsHBKbLn+Otx3c5YDqu4s=",
+        "lastModified": 1688897598,
+        "narHash": "sha256-yExNNdB2sHmShPEZG5SJcwyv3okbXeW1uYTbjD1I7AE=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "b6cc06826812247fe54655e0d5e49dcde253a72f",
+        "rev": "888b0910a7e50fdaf3b09e4ff53251dc7184c16f",
         "type": "github"
       },
       "original": {
