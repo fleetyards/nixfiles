@@ -74,6 +74,8 @@
             self.nixosModules.restic-backups
           ];
 
+          nix.channel.enable = false;
+
           deployment = {
             buildOnTarget = true;
             allowLocalDeployment = true;
