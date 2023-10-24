@@ -9,7 +9,7 @@
       url = "github:cachix/devenv";
       inputs.nixpkgs.follows = "/nixpkgs";
     };
-    kleonk = {
+    kloenk = {
       url = "github:kloenk/nixfiles";
       inputs.nixpkgs.follows = "/nixpkgs";
     };
