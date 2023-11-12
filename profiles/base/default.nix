@@ -3,7 +3,7 @@
 {
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  networking.domain = lib.mkDefault "fleetyards.net";
+  networking.domain = "fleetyards.net";
   networking.useNetworkd = lib.mkDefault true;
   networking.useDHCP = lib.mkDefault false;
   # TODO: 53 on lo via 20
@@ -33,7 +33,8 @@
   };
 
   sops.age.sshKeyPaths = [ "/persist/openssh/ed25519_key" ];
-  sops.defaultSopsFile = ../../secrets + "/${config.networking.hostName}.yaml";
+  sops.defaultSopsFile =
+    lib.mkForce (../../secrets + "/${config.networking.hostName}.yaml");
 
   security.sudo.wheelNeedsPassword = false;
 
@@ -77,5 +78,5 @@
 
   documentation.nixos.enable = false;
 
-  security.acme.defaults.email = "ca@fleetyards.net";
+  security.acme.defaults.email = lib.mkForce "ca@fleetyards.net";
 }

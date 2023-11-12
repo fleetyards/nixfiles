@@ -28,7 +28,7 @@
       ];
 
       systems =
-        [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aaarch64-darwin" ];
+        [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
 
       forAllSystems = f: nixpkgs.lib.genAttrs systems (system: f system);
 
@@ -63,14 +63,14 @@
 
         defaults = { pkgs, ... }: {
           imports = [
-            ./configuration/common
-            (kloenk + "/configuration/common/common.nix")
-            (kloenk + "/configuration/common/nginx")
-            (kloenk + "/configuration/common/kloenk.nix")
-            ./configuration/common/mortik.nix
+            ./profiles/base
+            (kloenk + "/profiles/base/nixos")
+            (kloenk + "/profiles/users/kloenk")
+            ./profiles/users/mortik
 
             sops-nix.nixosModules.sops
             kloenk.nixosModules.nftables
+            kloenk.nixosModules.helix
             self.nixosModules.restic-backups
           ];
 
@@ -87,7 +87,7 @@
             targetHost = "starcitizen.social";
             tags = [ "hetzner" "remote" ];
           };
-          imports = [ ./configuration/hosts/social ];
+          imports = [ ./hosts/social ];
         };
       };
 
